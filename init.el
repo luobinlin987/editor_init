@@ -5,7 +5,7 @@
 (setq package-archives '(("gnu"    . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                          ("nongnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
                          ("melpa"  . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize) ;; You might already have this line
 (setq confirm-kill-emacs #'yes-or-no-p)      ; 在关闭 Emacs 前询问是否确认关闭，防止误触
 (electric-pair-mode t)                       ; 自动补全括号
@@ -32,15 +32,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" "f079ef5189f9738cf5a2b4507bcaf83138ad22d9c9e32a537d61c9aae25502ef" default))
+   '("95b0bc7b8687101335ebbf770828b641f2befdcf6d3c192243a251ce72ab1692" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" "f079ef5189f9738cf5a2b4507bcaf83138ad22d9c9e32a537d61c9aae25502ef" default))
  '(package-selected-packages
-   '(elpy lsp-mode-20240523.840 lsp-mode gnuplot-mode key-chord auctex biblio ebib magit flycheck company-box company rainbow-delimiters highlight-symbol dashboard avy which-key amx counsel swiper)))
+   '(pydebug dracula-theme all-the-icons mu4e copilot elpy lsp-mode-20240523.840 lsp-mode gnuplot-mode key-chord auctex biblio ebib magit flycheck company-box company rainbow-delimiters highlight-symbol dashboard avy which-key amx counsel swiper)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Noto Sans Mono" :foundry "GOOG" :slant normal :weight regular :height 105 :width normal)))))
+ '(default ((t (:family "Noto Sans Mono" :foundry "GOOG" :slant normal :weight regular :height 100 :width normal)))))
 
 (use-package counsel
   :ensure t)
@@ -136,6 +136,8 @@
 (use-package ebib
   :ensure t)
 
+(setq ebib-preload-bib-files '("~/my_bibtex.bib"))
+
 (use-package biblio
   :ensure t)
 
@@ -156,6 +158,12 @@
   :ensure t)
 (key-chord-mode 1)
 
+(use-package markdown-mode
+  :ensure t)
+
+(use-package all-the-icons
+  :ensure t)
+
 ;; key-binding
 (global-set-key (kbd "C-c e") 'ebib)
 (global-set-key (kbd "C-c i") 'ebib-import-entries)
@@ -175,13 +183,15 @@
 (setq key-chord-two-keys-delay 0.1)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-define evil-visual-state-map "jk" 'evil-normal-state)
+(global-set-key (kbd "C-c p") (lambda () (interactive) (kill-new (buffer-file-name))))
 
 (setq TeX-output-view-style (quote (("^pdf$" "." "evince %o %(outpage)"))))
 
-(add-hook 'LaTeX-mode-hook
-(lambda()
-(add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-(setq TeX-command-default "XeLaTeX")))
+;; (add-hook 'LaTeX-mode-hook
+;; (lambda()
+;; (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+;; ;; (setq TeX-command-default "XeLaTeX")
+;; ))
 
 (provide 'init)
 ;;; init.el ends here
