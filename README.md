@@ -1,3 +1,5 @@
+gvim的基础配置足够了，不需要什么插件
+
 neovim除了init.lua配置文件外，还需要的后端配置包括：
 1. nodejs+npm
 2. npm+ci，在coc.nvim文件夹
